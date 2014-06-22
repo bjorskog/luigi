@@ -12,15 +12,21 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+import pymongo
 from luigi.target import Target
 
 class MongoTarget(Target):
     """ An extension of the Target class for writing to MongoDB. """
 
-    def __init__(self):
-        pass
+    def __init__(self, database, collection, host='localhost', port=27017):
+        self.database = database
+        self.collection = collection
+        self.client = pymongo.MongoClient(host, port)
 
     def exists(self):
-        pass
+        database = self.database
+        collection = self.collection
+        names = self.client[database].collection_names()
+        return collection in names
 
     
