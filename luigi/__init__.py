@@ -21,6 +21,7 @@ import configuration
 import interface
 import target
 import worker
+import mongo
 
 Event = worker.Event
 
@@ -31,6 +32,7 @@ Target = target.Target
 
 File = file.File  # TODO: remove, should be LocalTarget
 LocalTarget = File
+MongoTarget = mongo.MongoTarget
 Parameter = parameter.Parameter
 RemoteScheduler = rpc.RemoteScheduler
 RPCError = rpc.RPCError

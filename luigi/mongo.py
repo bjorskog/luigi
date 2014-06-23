@@ -24,13 +24,9 @@ class MongoTarget(Target):
         self.database = self.client[database]
         self.collection = self.database[collection]
 
-    def exists(self, doc):
+    def exists(self):
         """ checks if the document exists in the collection """
-        res = self.collection.find(doc)
-        if res is None:
-            return False
-        else:
-            return True
+        return False
 
     def insert(self, doc):
         """ will insert a document to the collection """
