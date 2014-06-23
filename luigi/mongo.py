@@ -19,14 +19,19 @@ class MongoTarget(Target):
     """ An extension of the Target class for writing to MongoDB. """
 
     def __init__(self, database, collection, host='localhost', port=27017):
-        self.database = database
-        self.collection = collection
+        """ initialization """
         self.client = pymongo.MongoClient(host, port)
+        self.database = self.client[database]
+        self.collection = self.database[collection]
 
-    def exists(self):
-        database = self.database
-        collection = self.collection
-        names = self.client[database].collection_names()
-        return collection in names
+    def exists(self, doc):
+        """ checks if the document exists in the collection """
+        res = self.collection.find(doc)
+        if res is None:
+            return False
+        else:
+            return True
 
-    
+    def insert(self, doc):
+        """ will insert a document to the collection """
+        self.collection.insert(doc)

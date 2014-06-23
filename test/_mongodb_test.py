@@ -11,17 +11,15 @@ collection = 'testcollection'
 class MongoTargetTest(unittest.TestCase):
     """ testing the mongo-target extension """
     def setUp(self):
-        self.client = pymongo.MongoClient(host, port)
-        self.collection = self.client[database][collection]
         self.target = MongoTarget(database, collection)
-
+        self.doc = { "timestamp":datetime.datetime.now() }
+        
     def test_insert(self):
-        collection = self.collection
-        collection.insert({"timestamp": datetime.datetime.now()})
+        self.target.insert(self.doc)
         
     def test_exists(self):
-        self.target.exists()
+        self.target.exists(self.doc)
 
     def test_not_exists(self):
-        pass
+        self.target.exists({"key":"rubbish"})
     
