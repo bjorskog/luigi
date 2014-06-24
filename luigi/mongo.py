@@ -13,9 +13,8 @@
 # the License.
 
 import pymongo
-from luigi.target import Target
 
-class MongoTarget(Target):
+class MongoTarget(object):
     """ An extension of the Target class for writing to MongoDB. """
 
     def __init__(self, database, collection, host='localhost', port=27017):

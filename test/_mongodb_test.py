@@ -18,8 +18,4 @@ class MongoTargetTest(unittest.TestCase):
         self.target.insert(self.doc)
         
     def test_exists(self):
-        self.target.exists(self.doc)
-
-    def test_not_exists(self):
-        self.target.exists({"key":"rubbish"})
-    
+        self.target.exists()
